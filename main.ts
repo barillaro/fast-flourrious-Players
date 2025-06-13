@@ -149,6 +149,9 @@ function processOrderMessage(messageInfo:any) {
     // messageInfo has all the information of the message
     // Use the information to decide what to do next
 
+    //DEBUG uncomment the next line to catch all the orders
+    // myID = messageInfo.courierID;
+    
     // Check if the order was sent to me :-O
     if (messageInfo.courierId == myID) {
         // Caramba!! The order is for me!!!
