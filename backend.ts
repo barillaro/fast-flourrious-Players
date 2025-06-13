@@ -43,8 +43,6 @@ function endGame() {
     // Show the NO icon during 1 second (a visual reference)
     basic.showIcon(IconNames.Ghost)
     basic.pause(1000)
-    // show the final score on screen
-    showStatus()
 }
 
 function announceOrder(){
@@ -76,7 +74,7 @@ function countdown(delyTime: number) {
 // === Helper: order delivered correctly ===
 function deliveryOK() {
     orderActive = false
-    myScore += 5
+    myScore += 2
     music.stopAllSounds()
     basic.showIcon(IconNames.Yes)
     basic.pause(1000)
@@ -86,7 +84,7 @@ function deliveryOK() {
 // === Helper: Delivery Fail ===
 function deliveryFail() {
     orderActive = false
-    myScore = Math.max(0, myScore - 5)
+    myScore = Math.max(0, myScore - 2)
     music.stopAllSounds()
     music.startMelody(["C5", "B", "A", "G", "F", "E", "D", "C"], MelodyOptions.Once)
     basic.showIcon(IconNames.Skull)

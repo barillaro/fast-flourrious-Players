@@ -40,8 +40,8 @@ let myScore = 0
 let printMessage = true;
 
 // Set the number of players!
-let players = 20;
-// Set your ID (Must be unique in your group)
+let players = 10;
+// Set your ID (Might be unique in your group)
 let myID = randint(1, players); // Change the random value for something fix
 // Set the difficulty of the game: "easy", (more to come later)
 let difficulty = "easy";
@@ -54,6 +54,7 @@ let ringbellPanel = ["A", "B", "0", "1", "2"]
 // =======================================
 // Configure the radio Group
 // TODO: radio.setGroup(use the radioGroup here)
+
 // start the game!
 // TODO: Call the startGame function
 
@@ -63,7 +64,10 @@ radio.onReceivedString(radioMessageReceived)
 
 // === handler of the reception ===
 function radioMessageReceived(message: string) {
+    // Adding some music notification when you receive a message
     music.playTone(262, 100)
+    music.playTone(362, 100)
+    music.playTone(462, 100)
 
     // You have received a radio message. We will print it on the display
     if (printMessage == true){
@@ -146,13 +150,13 @@ function processOrderMessage(messageInfo:any) {
     // Use the information to decide what to do next
 
     // Check if the order was sent to me :-O
-    if (messageInfo.CourierId == myID) {
+    if (messageInfo.courierId == myID) {
         // Caramba!! The order is for me!!!
         // mark the flag order active!
         orderActive = true
         // save the message info into the micro:bit memory
-        delyDoor = messageInfo.DelyDoor
-        delyTime = messageInfo.DelyTime
+        delyDoor = messageInfo.delyDoor
+        delyTime = messageInfo.delyTime
 
         // Show the door to deliver the order on the LED display
         basic.showString("Door:" + delyDoor)
@@ -176,6 +180,14 @@ function processOrderMessage(messageInfo:any) {
 }
 
 // === Inputs handlers ===
+// This function executes when the button A is pressed
+input.onButtonPressed(Button.AB, function () {
+    // call the showStatus function
+    showStatus();
+    // pressing AB disable the printing message on screen
+    printMessage = false;
+})
+
 // This function executes when the button A is pressed
 input.onButtonPressed(Button.A, function () {
     // deliver the order to door "A"
@@ -300,9 +312,10 @@ function encodeInfo():string {
 // =======================================
 // ========= Task: 5
 // =======================================
-    // TODO: concatenate the parts of information into a message.
-    //       Intercalate : in between as a separator
-    message = "" // concatenate + ":" + the + ":" +  parts        ;-)
+    // TODO: concatenate the parts of information (mType, mCourierID, mDoor, mDelyTime)
+    //       into a message.
+    //       Intercalate ":" in between as a separator
+    message = ""
 
     // return the message
     // The message order is ready! return the message
