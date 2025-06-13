@@ -302,7 +302,7 @@ function encodeInfo():string {
 // =======================================
     // TODO: concatenate the parts of information into a message.
     //       Intercalate : in between as a separator
-    message = "" // concatenate + ":" + the ":" +  parts ;-)
+    message = "" // concatenate + ":" + the + ":" +  parts        ;-)
 
     // return the message
     // The message order is ready! return the message
