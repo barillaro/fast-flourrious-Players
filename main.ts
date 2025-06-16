@@ -18,7 +18,7 @@
 
 
 // === Constants ===
-const defaultDelyTime = 6  // seconds
+const defaultDeliveryTime = 6  // seconds
 const defaultRadioGroup = 10
 const mGameOver = "gameOver"
 
@@ -27,8 +27,8 @@ let orderActive = false // false = order not active ; true = order activated!
 let gameOver = false // false = game is NOT over (playing) ; true = the game is over.
 
 // === Support Variables ===
-let delyDoor = ""
-let delyTime = defaultDelyTime;
+let deliveryDoor = ""
+let deliveryTime = defaultDeliveryTime;
 let myScore = 0
 
 // === Configuration variables ===
@@ -120,28 +120,28 @@ function decode(message:string){
     // We store the fields in variables starting with m (m for message)
     let mType = "";
     let mCourierId = 0;
-    let mDelyDoor = "";
-    let mDelyTime = 0;
+    let mDeliveryDoor = "";
+    let mDeliveryTime = 0;
     let mParts = [];
     // =======================================
     // ========= Task: 4
     // =======================================
     //TODO: split the message by the separator :
     //      take the message parts (0, 1, 2, and 3) in separated 
-    //      variables (mType, mCourierId, mDelyDoor, mDelyTime)
+    //      variables (mType, mCourierId, mDeliveryDoor, mDeliveryTime)
     // We need to split the parts by the separator
     mParts = message.split(":")
     mType = mParts[0];
     mCourierId = parseInt(mParts[1]);
-    // mDelyDoor = mParts[2];
-    // mDelyTime = parseInt(mParts[3]);
+    // mDeliveryDoor = mParts[2];
+    // mDeliveryTime = parseInt(mParts[3]);
 
     // Return a structure with all the message information
     return {
         type: mType,
         courierId: mCourierId,
-        delyDoor: mDelyDoor,
-        delyTime: mDelyTime
+        deliveryDoor: mDeliveryDoor,
+        deliveryTime: mDeliveryTime
     };
 }
 
@@ -158,14 +158,14 @@ function processOrderMessage(messageInfo:any) {
         // mark the flag order active!
         orderActive = true
         // save the message info into the micro:bit memory
-        delyDoor = messageInfo.delyDoor
-        delyTime = messageInfo.delyTime
+        deliveryDoor = messageInfo.deliveryDoor
+        deliveryTime = messageInfo.deliveryTime
 
         // Show the door to deliver the order on the LED display
-        basic.showString("Door:" + delyDoor)
+        basic.showString("Door:" + deliveryDoor)
 
-        // Start the countdown during "delyTime" seconds
-        countdown(delyTime)
+        // Start the countdown during "deliveryTime" seconds
+        countdown(deliveryTime)
 
         // The countdown function ended.
         // was the order delivered?  
@@ -236,7 +236,7 @@ function deliverTo(ringPressed: string) {
     if (orderActive == true) {
         // The order is active! 
         // Check if delivered correctly. Door must equal ringbell
-        if (delyDoor == ringPressed){
+        if (deliveryDoor == ringPressed){
             // order delivered correctly. Well done!
             deliveryOK()
         } else {
@@ -280,7 +280,7 @@ function encodeInfo():string {
     // - Type of message = order
     // - courierID = 12
     // - door = B
-    // - DelyTime = 5 seconds
+    // - DeliveryTime = 5 seconds
     // Combining all the data,
     // you can CODIFY a message as order:12:B:5
     
@@ -288,7 +288,7 @@ function encodeInfo():string {
     let mType = "order"
     let mCourierID;        // the courier destination
     let mDoor;             // the door to deliver the order
-    let mDelyTime         // the time left to deliver the order
+    let mDeliveryTime         // the time left to deliver the order
     let mSeparator = ":"  // a separator, to not mix the data
     let message: string   // The message with the full order
 
@@ -305,7 +305,7 @@ function encodeInfo():string {
 
 // Choose a delivery time
     // Use the default delivery time
-    mDelyTime = defaultDelyTime
+    mDeliveryTime = defaultDeliveryTime
 
 // Show the targetID on screen (and play some sound)   
     basic.showString("To:" + mCourierID)
@@ -315,7 +315,7 @@ function encodeInfo():string {
 // =======================================
 // ========= Task: 5
 // =======================================
-    // TODO: concatenate the parts of information (mType, mCourierID, mDoor, mDelyTime)
+    // TODO: concatenate the parts of information (mType, mCourierID, mDoor, mDeliveryTime)
     //       into a message.
     //       Intercalate ":" in between as a separator
     message = ""
