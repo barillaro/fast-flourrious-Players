@@ -1,5 +1,5 @@
 
-> Open this page at [https://barillaro.github.io/fast-flourrious-players/](https://barillaro.github.io/fast-flourrious-players/)
+> Open this page at [https://github.com/barillaro/fast-flourrious-Players](https://github.com/barillaro/fast-flourrious-Players?tab=readme-ov-file)
 
 ## Use as Extension
 

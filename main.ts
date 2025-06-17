@@ -54,9 +54,11 @@ let ringbellPanel = ["A", "B", "0", "1", "2"]
 // =======================================
 // Configure the radio Group
 // TODO: radio.setGroup(use the radioGroup here)
+    radio.setGroup(defaultRadioGroup)
 
 // start the game!
 // TODO: Call the startGame function
+    startGame();
 
 // === Receive Radio Message ===
 // This function executes when the device receives a radio message.
@@ -88,7 +90,7 @@ function radioMessageReceived(message: string) {
 // ========= Task: 2
 // =======================================
 // TODO: check if the message received is equal to "gameOver"
-   if (false) {
+   if (message == "gameOver") {
         // The message received indicates to end the game
         endGame()
         // return makes the function end
@@ -102,7 +104,7 @@ function radioMessageReceived(message: string) {
 // ========= Task: 3
 // =======================================
 // TODO: Check if the header of the message is "order"
-    if (false) {
+    if (header == "order") {
         // The message is of type order!
         // Just a visual representation
         announceOrder();
@@ -133,8 +135,8 @@ function decode(message:string){
     mParts = message.split(":")
     mType = mParts[0];
     mCourierId = parseInt(mParts[1]);
-    // mDeliveryDoor = mParts[2];
-    // mDeliveryTime = parseInt(mParts[3]);
+    mDeliveryDoor = mParts[2];
+    mDeliveryTime = parseInt(mParts[3]);
 
     // Return a structure with all the message information
     return {
