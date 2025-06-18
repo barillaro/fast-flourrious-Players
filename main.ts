@@ -40,7 +40,7 @@ let myScore = 0
 let printMessage = true;
 
 // Set the number of players!
-let players = 10;
+let players = 4;
 // Set your ID (Might be unique in your group)
 let myID = randint(1, players); // Change the random value for something fix
 // Set the difficulty of the game: "easy", (more to come later)
